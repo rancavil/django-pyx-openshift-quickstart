@@ -6,5 +6,5 @@ setup(name='django3',
       author='Rodrigo Ancavil',
       author_email='example@example.com',
       url='http://www.python.org/sigs/distutils-sig/',
-      install_requires=['Django==1.8'],
+      install_requires=['Django<=1.8'],
      )
