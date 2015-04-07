@@ -1,5 +1,9 @@
 #!/usr/bin/python
 import os
+import sys
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'openshift.settings'
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'openshift'))
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
