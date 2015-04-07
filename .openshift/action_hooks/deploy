@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo -e "Creating project"
+
+django-admin startproject openshift
+
+echo -e "Creating the database"
+
+cd openshift
+./manage migrate
