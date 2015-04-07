@@ -1,4 +1,7 @@
 venv/
+dist/
+build/
+*.egg-info/
 *.pyc
-*.egg-info
 *.py.backup
+

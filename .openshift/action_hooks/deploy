@@ -11,3 +11,7 @@ echo -e "Creating the database"
 
 cd $OPENSHIFT_REPO_DIR/openshift
 ./manage.py migrate
+
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/myproject/manage.py collectstatic --noinput'"
+cd "$OPENSHIFT_REPO_DIRi/openshift
+./manage.py collectstatic --noinput
