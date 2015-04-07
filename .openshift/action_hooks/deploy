@@ -10,4 +10,4 @@ django-admin startproject openshift
 echo -e "Creating the database"
 
 cd $OPENSHIFT_REPO_DIR/openshift
-./manage migrate
+./manage.py migrate
