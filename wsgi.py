@@ -17,4 +17,6 @@ except IOError:
 #
 
 import django.core.wsgi
-application = django.core.wsgi.get_wsgi_application()
+from dj_static import Cling
+
+application = Cling(django.core.wsgi.get_wsgi_application())
