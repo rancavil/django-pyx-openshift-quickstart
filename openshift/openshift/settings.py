@@ -10,18 +10,14 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# If ON_OPEJNSHIFT is True , run on production!
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ON_OPENSHIFT = False
 if 'OPENSHIFT_REPO_DIR' in os.environ:
      ON_OPENSHIFT = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6m3z#_st@jp)(8gd4tt@l%%6e-$00237zd+m#gcnbx!en)=8t('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:

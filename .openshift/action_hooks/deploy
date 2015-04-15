@@ -15,8 +15,6 @@ cd $OPENSHIFT_REPO_DIR/openshift
 ./manage.py makemigrations
 ./manage.py migrate
 
-
 echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py collectstatic --noinput'"
 cd $OPENSHIFT_REPO_DIR/openshift
 ./manage.py collectstatic --noinput
-
