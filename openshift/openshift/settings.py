@@ -33,6 +33,10 @@ else:
 
 TEMPLATE_DEBUG = True
 
+TEMPLATE_DIRS = (
+     os.path.join(BASE_DIR,'templates'),
+)
+
 # Application definition
 
 INSTALLED_APPS = (
