@@ -5,7 +5,7 @@ This is a repository helps you to install and run Django on Openshift.
 
 Create a python application on Openshift.
 
-     $ rhc app create django-app python-2.7
+     $ rhc app create djangoapp python-2.7
 
 Add this upstream repo.
 
