@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # If ON_OPEJNSHIFT is True , run on production!
@@ -21,7 +22,14 @@ if 'OPENSHIFT_REPO_DIR' in os.environ:
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6m3z#_st@jp)(8gd4tt@l%%6e-$00237zd+m#gcnbx!en)=8t('
+default_keys = {'SECRET_KEY':'6m3z#_st@jp)(8gd4tt@l%%6e-$00237zd+m#gcnbx!en)=8t('}
+use_keys = default_keys
+if ON_OPENSHIFT:
+     import openshiftlibs
+     use_keys = openshiftlibs.openshift_secure(default_keys)  
+
+SECRET_KEY = use_keys['SECRET_KEY']
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
@@ -64,13 +72,20 @@ WSGI_APPLICATION = 'openshift.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+if ON_OPENSHIFT:
+     DATABASES = {
+         'default': {
+             'ENGINE': 'django.db.backends.sqlite3',
+             'NAME': os.path.join(os.environ['OPENSHIFT_DATA_DIR'], 'db.sqlite3'),
+         }
+     }
+else:
+     DATABASES = {
+         'default': {
+             'ENGINE': 'django.db.backends.sqlite3',
+             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+         }
+     }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

@@ -6,14 +6,18 @@
 
 source $OPENSHIFT_HOMEDIR/python/virtenv/bin/activate
 
-echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py migrate'"
-cd $OPENSHIFT_REPO_DIR/openshift
-./manage.py migrate
-
-echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py makemigrations'"
-cd $OPENSHIFT_REPO_DIR/openshift
-./manage.py makemigrations
-./manage.py migrate
+if [ ! -f $OPENSHIFT_DATA_DIR/db.sqlite3 ]
+then
+     echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py migrate'"
+     cd $OPENSHIFT_REPO_DIR/openshift
+     ./manage.py migrate
+else:
+     cd $OPENSHIFT_REPO_DIR/openshift
+     echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py makemigrations'"
+     ./manage.py makemigrations
+     echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py migrate'"
+     ./manage.py migrate
+fi
 
 echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py collectstatic --noinput'"
 cd $OPENSHIFT_REPO_DIR/openshift
