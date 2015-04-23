@@ -1,4 +1,4 @@
-mport hashlib, inspect, os, random, sys
+import hashlib, inspect, os, random, sys
 
 
 # Gets the secret token provided by OpenShift
