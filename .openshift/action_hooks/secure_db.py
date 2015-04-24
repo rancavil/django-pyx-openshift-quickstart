@@ -6,6 +6,13 @@ lib_path      = os.environ['OPENSHIFT_REPO_DIR'] + 'openshift/openshift/'
 modinfo       = imp.find_module('openshiftlibs', [lib_path])
 openshiftlibs = imp.load_module('openshiftlibs', modinfo[0], modinfo[1], modinfo[2])
 
+# Creating admin user
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'openshift', 'openshift'))
+
+from django.contrib.auth.models import User
+User.objects.create_superuser(username='admin', password='secretpass', email='admin@yourmailserver.com')
+
 # Open the database
 conn = sqlite3.connect(os.environ['OPENSHIFT_DATA_DIR'] + '/db.sqlite3')
 c    = conn.cursor()
@@ -37,6 +44,10 @@ conn.close()
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'openshift', 'openshift'))
 from django.contrib.auth.models import User
+import django
+
+django.setup()
+
 usr = User.objects.get(username__exact='admin')
 usr.set_password(new_pass)
 usr.save()

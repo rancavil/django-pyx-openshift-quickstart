@@ -13,11 +13,15 @@ import sys
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "openshift.settings")
 sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'],'openshift'))
 
+PYTHON_VERSION = os.environ['OPENSHIFT_PYTHON_VERSION']
 
 virtenv = os.environ['OPENSHIFT_PYTHON_DIR'] + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 try:
-    execfile(virtualenv, dict(__file__=virtualenv))
+    if PYTHON_VERSION == '2.7':
+         execfile(virtualenv, dict(__file__=virtualenv))
+    else:
+         exec(compile(open(virtualenv).read(), virtualenv, 'exec'),dict(__file__ = virtualenv))
 except IOError:
     pass
 

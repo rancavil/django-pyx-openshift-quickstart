@@ -11,7 +11,7 @@ then
      echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py migrate'"
      cd $OPENSHIFT_REPO_DIR/openshift
      ./manage.py migrate
-else:
+else
      cd $OPENSHIFT_REPO_DIR/openshift
      echo "Executing '$OPENSHIFT_REPO_DIR/openshift/manage.py makemigrations'"
      ./manage.py makemigrations
