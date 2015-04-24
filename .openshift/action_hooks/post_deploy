@@ -6,7 +6,7 @@
 
 source $OPENSHIFT_HOMEDIR/python/virtenv/bin/activate
 
-if [ ! -f $OPENSHIFT_DATA_DIR/db.sqlite3 ]
+if [ ! -f $OPENSHIFT_DATA_DIR/CREDENTIALS ]
 then
      echo "Creating admin user"
      echo "Do not  forget change the password!!!!"
