@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import imp, sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -25,6 +26,8 @@ if 'OPENSHIFT_REPO_DIR' in os.environ:
 default_keys = {'SECRET_KEY':'6m3z#_st@jp)(8gd4tt@l%%6e-$00237zd+m#gcnbx!en)=8t('}
 use_keys = default_keys
 if ON_OPENSHIFT:
+     sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'],'openshift','openshift'))
+     imp.find_module('openshiftlibs')
      import openshiftlibs
      use_keys = openshiftlibs.openshift_secure(default_keys)  
 
